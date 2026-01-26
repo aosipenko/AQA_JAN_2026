@@ -13,7 +13,6 @@ public class GnomeSortWhile {
                 1,  //i = 5
                 9   //i = 6
         };
-
         while (i < array.length) {
             if (i != 0 && array[i] < array[i - 1]) {
                 int current = array[i];
@@ -24,7 +23,6 @@ public class GnomeSortWhile {
                 i++;
             }
         }
-
         for (int j = 0; j < array.length; j++) {
             System.out.printf(array[j] + " ");
         }
