@@ -1,6 +1,6 @@
 package org.prog.session5;
 
-public class Car {
+public class Сar {
 
     //TODO: add owner as String
     //TODO: make goTo print "car owned by {owner} is going to {destination} at {speed}
