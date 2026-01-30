@@ -18,11 +18,11 @@ public class Main {
     public static void main(String[] args) {
         CarService carService = new CarService();
 
-        Car myFirstCar = new Car();
+        Сar myFirstCar = new Сar();
         myFirstCar.plateNumber = "AA0000AA";
-        Car aliceCar = new Car();
-        Car bobsCar = new Car();
-        Car otherCar = myFirstCar;
+        Сar aliceCar = new Сar();
+        Сar bobsCar = new Сar();
+        Сar otherCar = myFirstCar;
 
         int amountToPay = 10;
 

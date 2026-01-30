@@ -2,7 +2,7 @@ package org.prog.session5;
 
 public class CarService {
 
-    public void paintCar(Car car, String color) {
+    public void paintCar(Сar car, String color) {
         System.out.println("Received car to paint with color: " + car.color);
         System.out.println("New color " + color);
         car.color = color;
