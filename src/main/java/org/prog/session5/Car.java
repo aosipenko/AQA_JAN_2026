@@ -1,9 +1,9 @@
 package org.prog.session5;
 
-public class Homework5 {
+public class Car {
 
     public static void main(String[] args) {
-        Homework5 car = new Homework5("black", 100, "AA1234BB", "Sebastian");
+        Car car = new Car ("black", 100, "AA1234BB", "Sebastian");
         car.goTo("Kyiv", 60);
     }
 
@@ -12,7 +12,7 @@ public class Homework5 {
     public String plateNumber;
     public String owner;
 
-    public Homework5(String color, int mileage, String plateNumber, String owner) {
+    public Car(String color, int mileage, String plateNumber, String owner) {
         this.color = color;
         this.mileage = mileage;
         this.plateNumber = plateNumber;
