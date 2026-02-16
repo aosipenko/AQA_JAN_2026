@@ -11,6 +11,7 @@ public class ArrayDemo {
             ints[i] = random.nextInt(100);
         }
 
+
         for (int i = 0; i < ints.length; i++) {
             System.out.println(ints[i]);
         }
