@@ -9,6 +9,7 @@ public class Car {
     public String color;
     public int mileage;
     public String plateNumber;
+    public  String owner;
 
     public void goTo(String destination, int speed) {
         System.out.println("before trip miles: " + mileage);
@@ -16,8 +17,14 @@ public class Car {
             System.out.println("Black cars are cool");
         }
         mileage += speed * 10;
-        System.out.println(color + " car is going to " + destination +
-                " at " + speed + " km/h");
+        System.out.println(owner + color + " car is going to " +  destination +
+                " at " + speed + " km/h"  );
         System.out.println("After trip miles: " + mileage);
     }
+
+    public void addPayment(int amountToPay) {
+    }
+
+
+
 }

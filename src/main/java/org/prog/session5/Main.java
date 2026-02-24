@@ -2,36 +2,42 @@ package org.prog.session5;
 
 public class Main {
 
-    /**
-     * ######################################
-     * ###[myFirstCar@Car]###################
-     * ######################################
-     * ####[aliceCar@Car]####################
-     * ####[bobsCar@Car]#####################
-     * ######################################
-     * ######################################
-     * ######################################
-     * ======================================
-     * #######10#############################
-     */
+
 
     public static void main(String[] args) {
+
         CarService carService = new CarService();
+
 
         Car myFirstCar = new Car();
         myFirstCar.plateNumber = "AA0000AA";
+        Car myCar = new Car();
+
+        myFirstCar.owner = "ron";
+
+
+
+
+
         Car aliceCar = new Car();
         Car bobsCar = new Car();
         Car otherCar = myFirstCar;
 
+
+
+
+
         int amountToPay = 10;
 
         carService.paintCar(myFirstCar, "blue");
+        carService.setCarOwner(myFirstCar, "ron");
+
         carService.addPayment(amountToPay);
-        myFirstCar.goTo("Kyiv", 70);
+        myFirstCar.goTo( "Kyiv",  70);
         myFirstCar.goTo("Odessa", 100);
 
-        System.out.println("After payment: " + amountToPay);
+        System.out.println("After payment: " + amountToPay );
+        System.out.println( myCar.owner );
 
 //        carService.paintCar(aliceCar, "yellow");
 //        carService.paintCar(bobsCar, "black");
