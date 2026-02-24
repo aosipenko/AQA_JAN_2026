@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Home3 {
     public static void main(String[] args) {
-        List<String> emails = List.of(
+        List<String> emails = List.<String>of(
                 "abcdefg@gmail.com", //+
                 "a@gmail.com", //-
                 "josh@@gmail.com", //-
