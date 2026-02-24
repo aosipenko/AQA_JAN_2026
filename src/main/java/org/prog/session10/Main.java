@@ -1,25 +1,27 @@
 package org.prog.session10;
 
+import java.util.*;
+
 public class Main {
-
     public static void main(String[] args) {
-        String s1 = "s1";
-        String s2 = "s1";
+        // Карта: Владелец -> Список его уникальных телефонов
+        Map<String, List<Phone>> registry = new HashMap<>();
 
-        boolean b = s1.equals(s2);
+        // Добавляем владельца и его девайсы
+        registry.put("Alice", new ArrayList<>(Arrays.asList(
+                new Phone("iPhone 15", "SN123"),
+                new Phone("Pixel 8", "SN456")
+        )));
 
-        String result = b ? "yes" : no();
+        registry.put("Bob", new ArrayList<>(Arrays.asList(
+                new Phone("Samsung S24", "SN789")
+        )));
 
-        if (b) {
-            result = "yes";
-        } else {
-            result = "no";
-        }
-
-        System.out.println(result);
-    }
-
-    public static String no(){
-        return "no";
+        // Вывод данных
+        registry.forEach((owner, phones) -> {
+            System.out.println(owner + " владеет: " + phones);
+        });
     }
 }
+
+
