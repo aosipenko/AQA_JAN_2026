@@ -1,23 +1,24 @@
 package org.prog.session6;
 
+import java.util.Random;
+
 public class Main {
-
     public static void main(String[] args) {
-//        int i = Calc.add(1, 10);
-//        String s = Calc.concat("1", "2");
-//
-//        System.out.println(i);
-//        System.out.println(s);
+        // Создаем массив грузовиков (используем твой класс Car)
+        Car[] trucks = new Car[3];
 
-        System.out.println(Calc.countTo(20));
-        System.out.println(Calc.countTo(49));
-        System.out.println(Calc.countTo(100));
-        Calc.countFromTo(30, 60);
+        // Заполняем данными
+        trucks[0] = new Car("Иван Иванов", "Volvo FH16", "AA1234BB");
+        trucks[1] = new Car("Петр Петров", "Scania R500", "BC7777CB");
+        trucks[2] = new Car("Андрей Сидоров", "MAN TGX", "AI5505EX");
 
-//        Truck truck1 = new Truck();
-//        truck1.name = "Vasya";
-//        truck1.delivery("Lviv", "Kyiv");
-//        truck1.delivery("Kyiv", "Odessa");
-//        truck1.delivery("Odessa", "Kyiv");
+        // Выводим информацию, используя метод getFullDetails и сохраняя в String
+        for (Car truck : trucks) {
+            String details = truck.getFullDetails();
+            System.out.println(details);
+        }
+
+        // Пример вызова твоего метода goTo
+        trucks[0].goTo("Base");
     }
 }
