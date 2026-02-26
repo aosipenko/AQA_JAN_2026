@@ -6,50 +6,34 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Map<Owner, List<Car>> phoneOwners = new HashMap<>();
+        Map<Owner, Set<Phone>> phoneOwners = new HashMap<>();
 
-        Owner owner1 = new Owner();
-        owner1.name = "John";
+        Owner owner1 = new Owner("John");
+        Owner owner2 = new Owner("Mike");
+        Owner owner3 = new Owner("Anna");
 
-        Owner owner2 = new Owner();
-        owner2.name = "Mike";
+        Phone phone1 = new Phone("iPhone");
+        Phone phone2 = new Phone("Samsung");
+        Phone phone3 = new Phone("Nokia");
 
-        Owner owner3 = new Owner();
-        owner3.name = "Anna";
+        phoneOwners.put(owner1, new HashSet<>());
+        phoneOwners.put(owner2, new HashSet<>());
+        phoneOwners.put(owner3, new HashSet<>());
 
-
-        Car phone1 = new Car();
-        phone1.model = "iPhone";
-
-        Car phone2 = new Car();
-        phone2.model = "Samsung";
-
-        Car phone3 = new Car();
-        phone3.model = "Nokia";
-
-
-        phoneOwners.put(owner1, new ArrayList<>());
         phoneOwners.get(owner1).add(phone1);
         phoneOwners.get(owner1).add(phone2);
 
-        phoneOwners.put(owner2, new ArrayList<>());
         phoneOwners.get(owner2).add(phone3);
 
-        phoneOwners.put(owner3, new ArrayList<>());
         phoneOwners.get(owner3).add(phone1);
 
 
-        Owner searchOwner = new Owner();
-        searchOwner.name = "John";
+        Owner searchOwner = new Owner("John");
 
-        List<Car> phones = phoneOwners.get(searchOwner);
+        Set<Phone> phones = phoneOwners.get(searchOwner);
 
-        if (phones != null) {
-            for (Car c : phones) {
-                System.out.println(c.model);
-            }
-        } else {
-            System.out.println("Owner not found");
+        for (Phone p : phones) {
+            System.out.println(p.model);
         }
 
     }
