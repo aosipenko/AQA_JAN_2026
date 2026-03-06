@@ -9,10 +9,6 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-//TODO: write testng tests to go to allo.ua
-//TODO: find seach input
-//TODO: search for iphone 17 pro max
-
 public class WebTests {
 
     private WebDriver driver;
@@ -29,10 +25,14 @@ public class WebTests {
 
     @Test
     public void myWebTest() {
-        driver.get("https://rozetka.com.ua/");
-        WebElement element = driver.findElement(By.name("search"));
-        element.sendKeys("Xiaomi");
-        element.sendKeys(Keys.ENTER);
+
+        driver.get("https://allo.ua/");
+
+        WebElement search = driver.findElement(By.id("search-form__input"));
+
+        search.sendKeys("iPhone 17 Pro Max");
+        search.sendKeys(Keys.ENTER);
+
         System.out.println("done!");
     }
 }
