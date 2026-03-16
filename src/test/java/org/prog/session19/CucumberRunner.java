@@ -11,7 +11,10 @@ import java.sql.SQLException;
         tags = "@wip and not @skip",
         features = "src/test/resources/features",
         glue = "org.prog.session19.steps",
-        plugin = {"html:target/cucumber-report.html"}
+        plugin = {
+                "html:target/cucumber-report.html",
+                "json:target/cucumber-reports/Cucumber.json"
+        }
 )
 public class CucumberRunner extends AbstractTestNGCucumberTests {
 
