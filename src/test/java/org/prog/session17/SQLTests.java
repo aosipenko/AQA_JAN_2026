@@ -3,14 +3,14 @@ package org.prog.session17;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.testng.Assert;
 import org.prog.session16.dto.PersonDto;
 import org.prog.session16.dto.ResultsDto;
-import org.testng.Assert;
+
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import java.net.Socket;
 import java.sql.*;
 import java.util.List;
 
@@ -22,10 +22,11 @@ public class SQLTests {
 
     @BeforeSuite
     public void beforeSuite() throws SQLException {
+
         conn = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/db",
                 "root",
-                "password"
+                "root"
         );
     }
 
@@ -92,11 +93,5 @@ public class SQLTests {
         }
 
 
-//        Statement stmt = conn.createStatement();
-//        for (PersonDto person : persons) {
-//            boolean result = stmt.execute(
-//                    "INSERT INTO Persons (FirstName, LastName, Gender, Title, Nat) " +
-//                            "VALUES ('" + person.getName().getFirst() + "', 'TestLastName1', 'TestGender', 'TestTitle', 'TestNat')");
-//        }
     }
 }
