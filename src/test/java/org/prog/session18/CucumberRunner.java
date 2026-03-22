@@ -4,20 +4,13 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.prog.session18.steps.DBSteps;
-import org.prog.session18.steps.GoogleSteps;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
-//TODO: on allo.ua:
-//TODO: search for iphone
-//TODO: find 3 first phone prices
-//TODO: check if this model is in DB if yes - assert price is same
-//TODO: if not in DB -> write to DB phone model and its price
+import java.time.Duration;
 
 @CucumberOptions(
         features = "src/test/resources/features",
@@ -25,31 +18,44 @@ import java.sql.SQLException;
 )
 public class CucumberRunner extends AbstractTestNGCucumberTests {
 
-    private Connection connection;
-    private WebDriver driver;
+    private static Connection connection;
+    public static WebDriver driver;
 
     @BeforeSuite
     public void beforeSuite() throws SQLException {
-        connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/db",
-                "root",
-                "password"
-        );
-        DBSteps.connection = connection;
+
+
+        String url = "jdbc:mysql://localhost:3306/test_db";
+        String user = "root";
+        String password = "root";
+
+        connection = DriverManager.getConnection(url, user, password);
+        System.out.println("DB connected");
+
 
         driver = new ChromeDriver();
-        GoogleSteps.driver = driver;
+        driver.manage().window().maximize();
+
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
     @AfterSuite
     public void afterSuite() throws SQLException {
-        try {
-            connection.close();
-        } catch (Exception e) {
-        }
-        try {
+
+
+        if (driver != null) {
             driver.quit();
-        } catch (Exception e) {
         }
+
+
+        if (connection != null) {
+            connection.close();
+            System.out.println("DB closed");
+        }
+    }
+
+    public static Connection getConnection() {
+        return connection;
     }
 }

@@ -1,52 +1,56 @@
 package org.prog.session18.steps;
 
-import io.cucumber.java.en.Given;
-import org.prog.session16.dto.PersonDto;
+import org.prog.session18.CucumberRunner;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DBSteps {
 
-    public static Connection connection;
+    public boolean phoneExists(String name) throws SQLException {
 
-    public static final List<String> randomNames = new ArrayList<>();
+        Connection conn = CucumberRunner.getConnection();
 
-    @Given("I store these people in DB")
-    public void storePeopleInDB() throws SQLException {
-        //turn them to java list
-        List<PersonDto> persons = ApiSteps.results.getResults();
+        PreparedStatement ps = conn.prepareStatement(
+                "SELECT price FROM phones WHERE name = ?"
+        );
 
-        //for each element in list -> record to DB
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO Persons (FirstName, LastName, Gender, Title, Nat) " +
-                        "VALUES (?, ?, ?, ?, ?)");
+        ps.setString(1, name);
 
-        for (PersonDto person : persons) {
-            preparedStatement.setString(1, person.getName().getFirst());
-            preparedStatement.setString(2, person.getName().getLast());
-            preparedStatement.setString(3, person.getGender());
-            preparedStatement.setString(4, person.getName().getTitle());
-            preparedStatement.setString(5, person.getNat());
-            try {
-                preparedStatement.execute();
-            } catch (SQLException e) {
-                System.out.println("Failed to insert into DB " + person);
-            }
-        }
+        ResultSet rs = ps.executeQuery();
+
+        return rs.next(); // true если есть
     }
 
-    @Given("I pick {int} random person from DB")
-    public void pickRandomPersonFromDB(int amount) throws SQLException {
-        Statement stmt = connection.createStatement();
-        ResultSet resultSet = stmt.executeQuery("select * from Persons ORDER BY RAND() LIMIT " + amount);
+    public long getPrice(String name) throws SQLException {
 
-        randomNames.clear();
-        while (resultSet.next()) {
-            String firstName = resultSet.getString("FirstName");
-            String lastName = resultSet.getString("LastName");
-            randomNames.add(firstName + " " + lastName);
+        Connection conn = CucumberRunner.getConnection();
+
+        PreparedStatement ps = conn.prepareStatement(
+                "SELECT price FROM phones WHERE name = ?"
+        );
+
+        ps.setString(1, name);
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            return rs.getLong("price");
         }
+
+        return -1;
+    }
+
+    public void insertPhone(String name, long price) throws SQLException {
+
+        Connection conn = CucumberRunner.getConnection();
+
+        PreparedStatement ps = conn.prepareStatement(
+                "INSERT INTO phones(name, price) VALUES (?, ?)"
+        );
+
+        ps.setString(1, name);
+        ps.setLong(2, price);
+
+        ps.executeUpdate();
     }
 }

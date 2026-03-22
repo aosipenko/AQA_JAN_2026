@@ -1,38 +1,59 @@
 package org.prog.session18.steps;
 
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.prog.session18.CucumberRunner;
 
+import java.time.Duration;
 import java.util.List;
 
 public class GoogleSteps {
 
-    public static WebDriver driver;
 
-    @Given("I open google main page")
-    public void openGooglePage() {
-        driver.get("https://www.google.com/");
+    @Given("I open allo")
+    public void i_open_allo() {
+        CucumberRunner.driver.get("https://allo.ua/");
     }
 
-    @Given("I accept cookies if present")
-    public void acceptCookiesIfPresent() {
-        WebElement cookiesLink = driver.findElement(By.xpath("//a[contains(@href,'technologies/cookies')]"));
-        if (cookiesLink.isDisplayed()) {
-            List<WebElement> buttons = driver.findElements(By.tagName("button"));
-            buttons.get(buttons.size() - 2).click();
-        } else {
-            System.out.println("No cookies link found - proceed");
+
+    @Given("I search iphone")
+    public void i_search_iphone() {
+
+        WebDriverWait wait = new WebDriverWait(CucumberRunner.driver, Duration.ofSeconds(10));
+
+        WebElement search = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("search-form__input"))
+        );
+
+        search.sendKeys("iphone");
+        search.sendKeys(Keys.ENTER);
+    }
+
+
+    @Then("I check first 3 phones")
+    public void checkPhones() {
+
+        WebDriverWait wait = new WebDriverWait(CucumberRunner.driver, Duration.ofSeconds(15));
+
+
+        List<WebElement> products = wait.until(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                        By.cssSelector("div.product-card")
+                )
+        );
+
+        for (int i = 0; i < 3; i++) {
+
+            WebElement price = products.get(i).findElement(
+                    By.cssSelector("span.sum")
+            );
+
+            System.out.println("Price: " + price.getText());
         }
-    }
-
-    @Given("I set search field to that person's first and last name")
-    public void setSearchFieldToThatPersonFirstAndLastName() throws InterruptedException {
-        String firstLastName = DBSteps.randomNames.get(0);
-        System.out.println("I will search for " + firstLastName);
-        WebElement searchInput = driver.findElement(By.name("q"));
-        searchInput.sendKeys(firstLastName);
-        Thread.sleep(1000);
     }
 }
