@@ -41,7 +41,6 @@ public class MyDBSteps {
 
     }
 
-
     @Then("Prices should match or be saved")
     public void checkResult() throws SQLException {
         for (int i = 0; i < MyGoogleSteps.models.size(); i++) {
